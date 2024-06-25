@@ -98,7 +98,7 @@ function kat3(event){
         <div className="container">
           
             {tasks.map((task, index) => (
-             <div  key={index}>
+             <div  className="produktitem" key={index}>
                 <Product 
                 
                 image={task.image}
