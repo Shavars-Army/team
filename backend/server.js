@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const fs = require("fs")
+const fs = require("fs");
+
 
 app.use(cors());
 app.use(express.json());
@@ -67,22 +68,49 @@ app.get("/warenkorb", (req, res) => {
 });
 
 // POST endpoint to add a product to the warenkorb
+
+function appendToWarenkorb(product) {
+  // Get current warenkorb data
+
+  let warenkorbData = getWarenkorb();
+
+  // Check if the product already exists in the warenkorb
+  const existingProductIndex = warenkorbData.findIndex(item => item.title === product.title);
+
+  if (existingProductIndex !== -1) {
+    // If product already exists, update the quantity
+    warenkorbData[existingProductIndex].menge += 1;
+  } else {
+    // If product doesn't exist, push it to warenkorbData
+    warenkorbData.push(product);
+  }
+
+  // Write the updated warenkorb data back to the file
+  fs.writeFileSync("./warenkorb.json", JSON.stringify(warenkorbData, null, 2));}
+
+// POST endpoint to add a product to the warenkorb
 app.post("/add-to-cart", (req, res) => {
   const { product } = req.body;
 
-  // Push the product to the warenkorb array
-  warenkorb.push(product);
-
-  // Save the updated warenkorb to warenkorb.json
-  saveWarenkorb();
+  // Add product to warenkorb
+  appendToWarenkorb(product);
 
   // Respond with a success message or any relevant data
   res.json({ message: "Product added to cart successfully!" });
 });
 
-
-
-
-
+app.delete("/wk/:index", (req, res) => {
+  let waren = getWarenkorb()
+// parseInt ist hier notwendig, da die params als String gespeichert werden
+const index = parseInt(req.params.index);
+if (index >= 0 && index < waren.length) {
+  waren = waren.filter((task, i) => i !== index);
+ //waren.splice(index, 1); 
+ res.json({ message: "Task wurde erfolgreich gelöscht" });
+  fs.writeFileSync("./warenkorb.json", JSON.stringify(waren, null, 2))
+}else {
+  res.status(400).json({message: "Bitte einen gültigen Index angeben"})
+}
+});
 
 app.listen(3002);

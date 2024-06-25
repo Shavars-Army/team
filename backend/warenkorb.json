@@ -1,8 +1,40 @@
 [
   {
+    "image": "https://m.media-amazon.com/images/I/81QuEGw8VPL._AC_UF1000,1000_QL80_.jpg",
+    "title": "The Great Gatsby",
+    "description": "A novel written by American author F. Scott Fitzgerald.",
+    "price": "10$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
     "image": "https://taktek.com.tn/3206-large_default/smartphone-infinix-smart-8-4go-64go-vert.jpg",
     "title": "Smartphone",
     "description": "A high-performance smartphone with advanced features.",
+    "menge": 1,
     "price": "599$"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/S/al-na-9d5791cf-3faf/3cbba532-5f03-43af-9a8c-d29c8528933a._SL480_.png",
+    "title": "Blender",
+    "description": "High-speed blender for smoothies, soups, and more.",
+    "price": "50",
+    "menge": 3,
+    "category": "Kitchen Appliances"
+  },
+  {
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe7FSXuLfWs-b5JyLrZwGsNM6fk0-ikkBV2g&s",
+    "title": "To Kill a Mockingbird",
+    "description": "A novel by Harper Lee published in 1960.",
+    "price": "15$",
+    "menge": 2,
+    "category": "Books"
+  },
+  {
+    "image": "https://cdn.thewirecutter.com/wp-content/media/2023/06/businesslaptops-2048px-0943.jpg?auto=webp&quality=75&width=1024",
+    "title": "Laptop",
+    "description": "Powerful laptop for work and entertainment.",
+    "menge": 5,
+    "price": "1299$"
   }
 ]

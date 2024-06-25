@@ -4,6 +4,7 @@
       "title": "Blender",
       "description": "High-speed blender for smoothies, soups, and more.",
       "price": "50",
+      "menge" : 1,
       "category": "Kitchen Appliances"
     }
   ]

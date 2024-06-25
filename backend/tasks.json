@@ -2,12 +2,15 @@
   "image": "https://taktek.com.tn/3206-large_default/smartphone-infinix-smart-8-4go-64go-vert.jpg",
   "title": "Smartphone",
   "description": "A high-performance smartphone with advanced features.",
+  "menge" : 1,
   "price": "599$"
 },
 {
   "image": "https://cdn.thewirecutter.com/wp-content/media/2023/06/businesslaptops-2048px-0943.jpg?auto=webp&quality=75&width=1024",
   "title": "Laptop",
   "description": "Powerful laptop for work and entertainment.",
+  "menge" : 1,
   "price": "1299$"
+
 }
 ]

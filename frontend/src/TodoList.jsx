@@ -18,11 +18,14 @@ function TodoList() {
   }
   useEffect(() => {
     //3kat2();
-   
+   fetch("http://localhost:3002/warenkorb")
+    .then((response) => response.json())
+    .then((data) => setWaren(data))
+    .catch((error) => console.error("Fehler beim API-Aufruf", error));
 
   }, []);
-  function addProductToCart(product) {
-    fetch("http://localhost:3002/add-to-cart", {
+  async function addProductToCart(product) {
+    await fetch("http://localhost:3002/add-to-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,6 +38,17 @@ function TodoList() {
         // Optionally, you can handle success response here
       })
       .catch((error) => console.error("Error adding product to cart:", error));
+      await fetchAllData();
+  }
+  
+  async function deletefromcart(index) {
+    await fetch(`http://localhost:3002/wk/${index}`, {
+      method: "DELETE",
+    });
+    await fetchAllData();
+    // const updatedTasks = tasks.filter((task, i) => i !== index);
+    // const updatedTasks = tasks.filter((_, i) => i !== index); // quasi das gleiche, nur anders geschrieben
+    // setTasks(updatedTasks);
   }
 
 function kat1(event){
@@ -90,6 +104,7 @@ function kat3(event){
                 image={task.image}
                  title={task.title}
                  description={task.description}
+                 menge={task.menge}
                  price={task.price}
                
                 
@@ -108,6 +123,31 @@ function kat3(event){
         <br></br>
             <hr></hr>
             <Warenkorb/>
+            <div className="container">
+          
+            {waren.map((task, index) => (
+             <div  key={index}>
+                <Product 
+                
+                image={task.image}
+                 title={task.title}
+                 description={task.description}
+                 price={task.price}
+                 menge={task.menge}
+                 
+                
+                />
+                <button onClick={() => deletefromcart(index)}>delete</button>
+
+                </div>
+                
+                
+                
+               
+            
+            ))}
+            
+        </div>
            
           
       </div>
