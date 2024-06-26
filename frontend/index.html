@@ -1,13 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-  </head>
-  <body>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative; /* Ermöglicht die absolute Positionierung */
+        }
+        .loading-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white; /* Hintergrundfarbe für bessere Sichtbarkeit */
+            z-index: 9999; /* Sicherstellen, dass es über allem liegt */
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-gif">
+        <img src="/images/D.L.gif" alt="GIF beim Laden">
+    </div>
     <div id="root"></div>
+    <script type="module">
+        // Entfernen des GIFs nach einem Delay von 6 Sekunden
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const loadingGif = document.querySelector('.loading-gif');
+                loadingGif.style.display = 'none';
+            }, 2500); // Delay von 2,5 Sekunden
+        });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
-  </body>
+</body>
 </html>
