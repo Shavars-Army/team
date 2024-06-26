@@ -98,6 +98,19 @@ app.delete("/wk/:index", (req, res) => {
         res.status(400).json({ message: "Bitte einen gültigen Index angeben" }); // Sendet eine Fehlermeldung zurück, falls der Index ungültig ist
     }
 });
+app.delete("/wk1/:index", (req, res) => {
+  let waren = getWarenkorb();
+  const index = parseInt(req.params.index);
+
+  if (waren[index].menge > 1) {
+    waren[index].menge -= 1;
+    fs.writeFileSync("./warenkorb.json", JSON.stringify(waren, null, 2));
+    res.json({ message: "Produkt erfolgreich gelöscht" });
+  } else {
+    res.status(400).json({ error: "Die Menge kann nicht auf unter 1 reduziert werden. Bitte löschen Sie das gesamte Produkt." });
+  }
+});
+
 
 // DELETE-Endpunkt, um die Menge eines Produkts im Warenkorb zu reduzieren
 app.delete("/wk1/:index", (req, res) => {
