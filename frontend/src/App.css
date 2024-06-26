@@ -39,6 +39,10 @@ body {
   border: solid 2px rgb(70, 64, 64);
 }
 
+.container:empty {
+  display: none;
+}
+
 
 header h1 {
   
