@@ -7,7 +7,7 @@ function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [waren, setWaren] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const [cat,setCat] = useState("Kategorie")
+  const [cat,setCat] = useState("")
 
   // useEffect(() => {}, []); -> Grundgerüst von useEffect
   function fetchAllData() {
