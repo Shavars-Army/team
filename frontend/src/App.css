@@ -142,6 +142,7 @@ body::before {
   justify-content: space-between;
   border-radius: 5px;
   padding: 15px;
+  color: rgb(224, 219, 219);
   background-color: rgb(51, 49, 73);
   font-size: 10px;
   max-width: 80px;
