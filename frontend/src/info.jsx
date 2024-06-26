@@ -9,7 +9,6 @@ function Info() {
             Erik Richter<br />
             Markus Heindle<br />
             Ameni Kallel<br />
-            Gabriel Ghergesanu<br />
             Roland Bota<br />
           </p>
         </div>
