@@ -3,114 +3,117 @@ const app = express();
 const cors = require("cors");
 const fs = require("fs");
 
+// Middleware setup
+app.use(cors()); // Erlaubt Cross-Origin Requests
+app.use(express.json()); // Parse JSON request bodies
 
-app.use(cors());
-app.use(express.json());
-
-function getTasks(){
-    const data =fs.readFileSync("./tasks.json")
-    return JSON.parse(data)
+// Funktionen zur Datenbeschaffung für Kategorien
+function getCategory() {
+    const data = fs.readFileSync("./Category.json"); // Liest Category.json Datei
+    return JSON.parse(data); // Parst die JSON-Daten und gibt sie zurück
+}
+function getCategory1() {
+  const data = fs.readFileSync("./Category1.json"); // Liest Category1.json Datei
+  return JSON.parse(data); // Parst die JSON-Daten und gibt sie zurück
+}
+function getCategory3() {
+    const data = fs.readFileSync("./Category3.json"); // Liest Category3.json Datei
+    return JSON.parse(data); // Parst die JSON-Daten und gibt sie zurück
 }
 
-function getTasks3(){
-  const data =fs.readFileSync("./tasks3.json")
-  return JSON.parse(data)
-}
-function getTasks1(){
-  const data =fs.readFileSync("./tasks1.json")
-  return JSON.parse(data)
-}
 
-// Holt mir alle Tasks
-app.get("/tasks", (req, res) => {
-    let tasks = getTasks()
-  res.json(tasks);
-});
-app.get("/tasks1", (req, res) => {
-  let tasks = getTasks1()
-res.json(tasks);
-});
-app.get("/tasks3", (req, res) => {
-  let tasks = getTasks3()
-res.json(tasks);
+
+// Endpunkte zum Abrufen von Kategorien
+app.get("/Category", (req, res) => {
+    let Category = getCategory(); // Ruft die Funktion getCategory auf
+    res.json(Category); // Sendet die Kategoriedaten als JSON zurück
 });
 
-// Holt mir ein bestimmtes Element aus der Tasks Liste
+app.get("/Category1", (req, res) => {
+    let Category = getCategory1(); // Ruft die Funktion getCategory1 auf
+    res.json(Category); // Sendet die Kategoriedaten als JSON zurück
+});
 
+app.get("/Category3", (req, res) => {
+    let Category = getCategory3(); // Ruft die Funktion getCategory3 auf
+    res.json(Category); // Sendet die Kategoriedaten als JSON zurück
+});
 
-// Move task up
-// Move task down
-
-
-
+// Initialisierung des Warenkorbs als leeres Array
 let warenkorb = [];
 
-// Helper function to read the warenkorb.json file
+// Hilfsfunktionen zum Lesen und Schreiben der warenkorb.json Datei
 function getWarenkorb() {
-  try {
-    const data = fs.readFileSync("./warenkorb.json");
-    return JSON.parse(data);
-  } catch (error) {
-    // If file doesn't exist or error reading, return empty array
-    return [];
-  }
+    try {
+        const data = fs.readFileSync("./warenkorb.json"); // Versucht, die Datei zu lesen
+        return JSON.parse(data); // Parst die JSON-Daten und gibt sie zurück
+    } catch (error) {
+        return []; // Falls ein Fehler auftritt oder die Datei nicht existiert, gibt es ein leeres Array zurück
+    }
 }
 
-// Helper function to write the warenkorb to the file
 function saveWarenkorb() {
-  fs.writeFileSync("./warenkorb.json", JSON.stringify(warenkorb, null, 2));
+    fs.writeFileSync("./warenkorb.json", JSON.stringify(warenkorb, null, 2)); // Schreibt den Warenkorb als JSON formatiert in die Datei
 }
 
-// GET endpoint to fetch the current contents of the warenkorb
+// GET-Endpunkt, um den aktuellen Inhalt des Warenkorbs abzurufen
 app.get("/warenkorb", (req, res) => {
-  const warenkorbData = getWarenkorb();
-  res.json(warenkorbData);
+    const warenkorbData = getWarenkorb(); // Ruft den aktuellen Warenkorb ab
+    res.json(warenkorbData); // Sendet die Warenkorbdetails als JSON zurück
 });
 
-// POST endpoint to add a product to the warenkorb
-
+// POST-Endpunkt, um ein Produkt zum Warenkorb hinzuzufügen
 function appendToWarenkorb(product) {
-  // Get current warenkorb data
+    let warenkorbData = getWarenkorb(); // Ruft den aktuellen Warenkorb ab
 
-  let warenkorbData = getWarenkorb();
+    const existingProductIndex = warenkorbData.findIndex(item => item.title === product.title); // Sucht nach dem Index des vorhandenen Produkts im Warenkorb
 
-  // Check if the product already exists in the warenkorb
-  const existingProductIndex = warenkorbData.findIndex(item => item.title === product.title);
+    if (existingProductIndex !== -1) {
+        warenkorbData[existingProductIndex].menge += 1; // Wenn das Produkt bereits existiert, erhöht es die Menge um eins
+    } else {
+        warenkorbData.push(product); // Fügt das Produkt dem Warenkorb hinzu, falls es nicht existiert
+    }
 
-  if (existingProductIndex !== -1) {
-    // If product already exists, update the quantity
-    warenkorbData[existingProductIndex].menge += 1;
-  } else {
-    // If product doesn't exist, push it to warenkorbData
-    warenkorbData.push(product);
-  }
-
-  // Write the updated warenkorb data back to the file
-  fs.writeFileSync("./warenkorb.json", JSON.stringify(warenkorbData, null, 2));}
-
-// POST endpoint to add a product to the warenkorb
-app.post("/add-to-cart", (req, res) => {
-  const { product } = req.body;
-
-  // Add product to warenkorb
-  appendToWarenkorb(product);
-
-  // Respond with a success message or any relevant data
-  res.json({ message: "Product added to cart successfully!" });
-});
-
-app.delete("/wk/:index", (req, res) => {
-  let waren = getWarenkorb()
-// parseInt ist hier notwendig, da die params als String gespeichert werden
-const index = parseInt(req.params.index);
-if (index >= 0 && index < waren.length) {
-  waren = waren.filter((task, i) => i !== index);
- //waren.splice(index, 1); 
- res.json({ message: "Task wurde erfolgreich gelöscht" });
-  fs.writeFileSync("./warenkorb.json", JSON.stringify(waren, null, 2))
-}else {
-  res.status(400).json({message: "Bitte einen gültigen Index angeben"})
+    fs.writeFileSync("./warenkorb.json", JSON.stringify(warenkorbData, null, 2)); // Schreibt die aktualisierten Warenkorbdetails in die Datei
 }
+
+app.post("/add-to-cart", (req, res) => {
+    const { product } = req.body; // Extrahiert das Produkt aus dem Anfragekörper
+
+    appendToWarenkorb(product); // Fügt das Produkt dem Warenkorb hinzu
+
+    res.json({ message: "Produkt erfolgreich zum Warenkorb hinzugefügt!" }); // Sendet eine Erfolgsmeldung zurück
 });
 
-app.listen(3002);
+// DELETE-Endpunkt, um ein Produkt aus dem Warenkorb zu löschen
+app.delete("/wk/:index", (req, res) => {
+    let waren = getWarenkorb(); // Ruft den aktuellen Warenkorb ab
+    const index = parseInt(req.params.index); // Konvertiert den Indexparameter in eine Ganzzahl
+
+    if (index >= 0 && index < waren.length) { // Überprüft, ob der Index gültig ist
+        waren = waren.filter((task, i) => i !== index); // Filtert das Produkt aus dem Warenkorb
+        res.json({ message: "Produkt wurde erfolgreich gelöscht" }); // Sendet eine Erfolgsmeldung zurück
+        fs.writeFileSync("./warenkorb.json", JSON.stringify(waren, null, 2)); // Schreibt die aktualisierten Warenkorbdetails in die Datei
+    } else {
+        res.status(400).json({ message: "Bitte einen gültigen Index angeben" }); // Sendet eine Fehlermeldung zurück, falls der Index ungültig ist
+    }
+});
+
+// DELETE-Endpunkt, um die Menge eines Produkts im Warenkorb zu reduzieren
+app.delete("/wk1/:index", (req, res) => {
+    let waren = getWarenkorb(); // Ruft den aktuellen Warenkorb ab
+    const index = parseInt(req.params.index); // Konvertiert den Indexparameter in eine Ganzzahl
+
+    if (waren[index].menge > 1) { // Überprüft, ob die Menge größer als eins ist
+        waren[index].menge -= 1; // Reduziert die Menge um eins
+        fs.writeFileSync("./warenkorb.json", JSON.stringify(waren, null, 2)); // Schreibt die aktualisierten Warenkorbdetails in die Datei
+        res.json({ message: "Menge des Produkts erfolgreich reduziert" }); // Sendet eine Erfolgsmeldung zurück
+    } else {
+        res.status(400).json({ error: "Die Menge kann nicht auf unter 1 reduziert werden. Bitte löschen Sie das gesamte Produkt." }); // Sendet eine Fehlermeldung zurück, falls die Menge nicht weiter reduziert werden kann
+    }
+});
+
+// Server starten und auf Anfragen auf Port 3002 hören
+app.listen(3002, () => {
+    console.log("Server läuft auf Port 3002");
+});

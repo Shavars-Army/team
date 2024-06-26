@@ -1,0 +1,82 @@
+[
+  {
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwjvtARVQAFZvjgby4i1ev7I2h0OgHcG8YoQ&s",
+    "title": "The Lord of the Rings",
+    "description": "An epic fantasy novel by J.R.R. Tolkien.",
+    "price": "25$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/I/81YOuOGFCJL._AC_UL600_SR600,600_.jpg",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "description": "A fantasy novel by J.K. Rowling.",
+    "price": "12$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/I/91HHqVTAJQL._AC_UL600_SR600,600_.jpg",
+    "title": "The Alchemist",
+    "description": "A novel by Paulo Coelho.",
+    "price": "10$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/I/716E6dQ4BXL._AC_UF1000,1000_QL80_.jpg",
+    "title": "Sapiens: A Brief History of Humankind",
+    "description": "A book by Yuval Noah Harari.",
+    "price": "18$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwcPNm6O31SKjNdfS1xWyVSTD082zKTzJvQ&s",
+    "title": "Catch-22",
+    "description": "A novel by Joseph Heller.",
+    "price": "14$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/I/71UypkUjStL._AC_UL600_SR600,600_.jpg",
+    "title": "One Hundred Years of Solitude",
+    "description": "A novel by Gabriel Garcia Marquez.",
+    "price": "16$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/I/91zU70Aw9IS._AC_UF1000,1000_QL80_.jpg",
+    "title": "Jane Eyre",
+    "description": "A novel by Charlotte Brontë.",
+    "price": "10$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://m.media-amazon.com/images/I/81IzbD2IiIL._AC_UF1000,1000_QL80_.jpg",
+    "title": "The Kite Runner",
+    "description": "A novel by Khaled Hosseini.",
+    "price": "12$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ1h6JF_GWRd5OoG0WZYOtTDPtFfFZPsuGzQ&s",
+    "title": "The Odyssey",
+    "description": "An ancient Greek epic poem attributed to Homer.",
+    "price": "15$",
+    "menge": 1,
+    "category": "Books"
+  },
+  {
+    "image": "https://images.penguinrandomhouse.com/cover/9780451530578",
+    "title": "A Tale of Two Cities",
+    "description": "A novel by Charles Dickens.",
+    "price": "8$",
+    "menge": 1,
+    "category": "Books"
+  }
+]
